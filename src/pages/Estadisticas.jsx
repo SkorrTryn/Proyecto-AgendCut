@@ -7,7 +7,7 @@ import {
 import logoAgendcut from '../assets/Logo.svg';
 import { estadisticasService } from '../services/estadisticasService';
 
-// enerador dinámico de meses
+// Generador dinámico de meses
 const generarOpcionesMeses = () => {
   const opciones = [];
   const hoy = new Date();
@@ -187,10 +187,7 @@ const Estadisticas = () => {
           <h2 className="admin-subtitle">Centro de comando</h2>
           <h1 className="welcome-title" style={{ fontSize: '2.5rem', marginBottom: 0 }}>Análisis financiero</h1>
         </div>
-        
-        {/* === DESPLEGABLE DE MESES (CUSTOM DROPDOWN) === */}
         <div className="month-selector-container custom-dropdown">
-          
           <button 
             className={`month-selector-trigger ${isDropdownOpen ? 'active' : ''}`}
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
