@@ -1,4 +1,4 @@
-# AgendCut - Sistema de Gestión de Citas para Barberías
+# AgendCut - Sistema de gestión de sistemas para micrioempresas de belleza/estetica
 
 AgendCut es una plataforma web integral diseñada para optimizar la administración de servicios en el sector de la estética masculina. La aplicación facilita la interacción entre clientes y barberos, permitiendo una gestión eficiente de agendas y perfiles de usuario.
 
