@@ -90,34 +90,49 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={
-          !session ? <Navigate to="/login" replace /> : <Navigate to={getRedirectPath()} replace />
-        } />
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#FDFBF7' }}>
+        <main style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={
+              !session ? <Navigate to="/login" replace /> : <Navigate to={getRedirectPath()} replace />
+            } />
 
-        <Route path="/login" element={
-          session ? <Navigate to={getRedirectPath()} replace /> : <Login />
-        } />
+            <Route path="/login" element={
+              session ? <Navigate to={getRedirectPath()} replace /> : <Login />
+            } />
 
-        {/* RUTAS ADMIN */}
-        <Route path="/admin" element={<RequireAuth allowedRole="admin"><AdminDashboard /></RequireAuth>} />
-        <Route path="/citas" element={<RequireAuth allowedRole="admin"><GestionCitas /></RequireAuth>} />
-        <Route path="/servicios" element={<RequireAuth allowedRole="admin"><GestionServicios /></RequireAuth>} />
-        <Route path="/barberos" element={<RequireAuth allowedRole="admin"><GestionBarberos /></RequireAuth>} />
-        <Route path="/estadisticas" element={<RequireAuth allowedRole="admin"><Estadisticas /></RequireAuth>} />
-        <Route path="/inventario" element={<RequireAuth allowedRole="admin"><Inventario /></RequireAuth>} />
+            {/* RUTAS ADMIN */}
+            <Route path="/admin" element={<RequireAuth allowedRole="admin"><AdminDashboard /></RequireAuth>} />
+            <Route path="/citas" element={<RequireAuth allowedRole="admin"><GestionCitas /></RequireAuth>} />
+            <Route path="/servicios" element={<RequireAuth allowedRole="admin"><GestionServicios /></RequireAuth>} />
+            <Route path="/barberos" element={<RequireAuth allowedRole="admin"><GestionBarberos /></RequireAuth>} />
+            <Route path="/estadisticas" element={<RequireAuth allowedRole="admin"><Estadisticas /></RequireAuth>} />
+            <Route path="/inventario" element={<RequireAuth allowedRole="admin"><Inventario /></RequireAuth>} />
 
-        {/* RUTA BARBERO */}
-        <Route path="/barbero" element={<RequireAuth allowedRole="barbero"><BarberoDashboard /></RequireAuth>} />
+            {/* RUTA BARBERO */}
+            <Route path="/barbero" element={<RequireAuth allowedRole="barbero"><BarberoDashboard /></RequireAuth>} />
 
-        {/* RUTA CLIENTE */}
-        <Route path="/cliente" element={<RequireAuth allowedRole="client"><ClienteDashboard /></RequireAuth>} />
+            {/* RUTA CLIENTE */}
+            <Route path="/cliente" element={<RequireAuth allowedRole="client"><ClienteDashboard /></RequireAuth>} />
 
-        {/* RUTA PÚBLICA: RESTABLECER CONTRASEÑA (no requiere sesión activa, Supabase trae el token en la URL) */}
-        <Route path="/reset-password" element={<ResetPassword />} />
+            {/* RUTA PÚBLICA: RESTABLECER CONTRASEÑA */}
+            <Route path="/reset-password" element={<ResetPassword />} />
+          </Routes>
+        </main>
         
-
-      </Routes>
+        {/* FOOTER GLOBAL PROFESIONAL */}
+        <footer style={{
+          padding: '1.5rem',
+          textAlign: 'center',
+          color: '#6B7280',
+          fontSize: '0.85rem',
+          backgroundColor: 'transparent',
+          marginTop: 'auto',
+          zIndex: 10
+        }}>
+          <strong>AgendCut &copy; {new Date().getFullYear()}</strong> | Plataforma web desarrollada por el <strong>Ing. Danny Novoa</strong>.
+        </footer>
+      </div>
     </Router>
   );
 }

@@ -1,7 +1,7 @@
 import { supabase } from '../supabase/client';
 
 export const inventarioService = {
-  // 1. gestión del catálogo (tabla productos)
+  // Gestión del catálogo (tabla productos)
   obtenerProductos: async () => {
     const { data, error } = await supabase
       .from('productos')
@@ -43,10 +43,10 @@ export const inventarioService = {
     return true;
   },
 
-  // 2. movimientos y egresos (tabla compras)
-  // Esta es la función "mágica" que gasta el dinero y suma el stock al mismo tiempo
+  // Movimientos y egresos (tabla compras)
+
   registrarCompra: async (compra, stockActual) => {
-    // 1. Registramos el gasto en el libro contable
+    // Registro el gasto en el libro contable
     const { error: errorCompra } = await supabase
       .from('compras_inventario')
       .insert([{
@@ -58,7 +58,7 @@ export const inventarioService = {
       
     if (errorCompra) throw errorCompra;
 
-    // 2. Le sumamos esa cantidad al stock físico del producto
+    // Se suma esa cantidad al stock físico del producto
     const nuevoStock = Number(stockActual) + Number(compra.cantidad);
     const { error: errorStock } = await supabase
       .from('productos')
@@ -81,7 +81,7 @@ export const inventarioService = {
     return true;
   },
 
-  // 3. métricas financieras
+  // Métricas financieras
   // Trae todos los gastos de un mes específico para nuestro "Centro de Comando"
   obtenerGastosPorMes: async (fechaInicio, fechaFin) => {
     const { data, error } = await supabase
