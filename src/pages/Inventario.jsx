@@ -165,7 +165,7 @@ const Inventario = () => {
     }
   };
 
-  // 3. Ajuste (Consumo manual)
+  // 3. Ajuste (consumo manual)
   const abrirModalAjuste = (prod) => {
     setProductoActual(prod);
     setFormAjuste({ stock_actual: prod.stock_actual });

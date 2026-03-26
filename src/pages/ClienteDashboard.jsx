@@ -767,18 +767,28 @@ const ClienteDashboard = () => {
                     </div>
                   )}
 
-                  {/* Botón: exige barbero + fecha + hora + sin conflicto */}
+                  {/* TARJETA DE FECHA ANTIGUA */}
+                  {cita.fecha && cita.fecha < new Date().toISOString().split('T')[0] && (
+                    <div style={{ backgroundColor: '#FEF2F2', borderLeft: '4px solid #EF4444', padding: '1.2rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                      <AlertCircle color="#EF4444" size={24} style={{ flexShrink: 0 }} />
+                      <span style={{ color: '#991B1B', fontWeight: 600, fontFamily: "'Open Sans', sans-serif", fontSize: '0.95rem' }}>
+                        ¡Ups! Has escrito una fecha pasada. No es posible agendar en días anteriores.
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Botón: exige barbero + fecha + hora + sin conflicto y sin fecha antigua */}
                   <button
-                    disabled={!cita.fecha || !cita.barbero || !cita.hora || conflictoHorario || verificandoHora}
+                    disabled={!cita.fecha || !cita.barbero || !cita.hora || conflictoHorario || verificandoHora || cita.fecha < new Date().toISOString().split('T')[0]}
                     onClick={() => setPaso(3)}
                     style={{
                       width: '100%', padding: '1.2rem',
-                      backgroundColor: (cita.fecha && cita.barbero && cita.hora && !conflictoHorario) ? '#111827' : '#E5E7EB',
-                      color: (cita.fecha && cita.barbero && cita.hora && !conflictoHorario) ? '#fff' : '#9CA3AF',
+                      backgroundColor: (cita.fecha && cita.barbero && cita.hora && !conflictoHorario && cita.fecha >= new Date().toISOString().split('T')[0]) ? '#111827' : '#E5E7EB',
+                      color: (cita.fecha && cita.barbero && cita.hora && !conflictoHorario && cita.fecha >= new Date().toISOString().split('T')[0]) ? '#fff' : '#9CA3AF',
                       borderRadius: '12px', border: 'none', fontWeight: 600,
-                      cursor: (cita.fecha && cita.barbero && cita.hora && !conflictoHorario) ? 'pointer' : 'not-allowed',
+                      cursor: (cita.fecha && cita.barbero && cita.hora && !conflictoHorario && cita.fecha >= new Date().toISOString().split('T')[0]) ? 'pointer' : 'not-allowed',
                       fontSize: '1.1rem', transition: 'all 0.3s',
-                      boxShadow: (cita.fecha && cita.barbero && cita.hora && !conflictoHorario) ? '0 4px 6px rgba(0,0,0,0.1)' : 'none',
+                      boxShadow: (cita.fecha && cita.barbero && cita.hora && !conflictoHorario && cita.fecha >= new Date().toISOString().split('T')[0]) ? '0 4px 6px rgba(0,0,0,0.1)' : 'none',
                       fontFamily: "'Open Sans', sans-serif"
                     }}
                   >

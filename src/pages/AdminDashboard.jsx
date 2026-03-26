@@ -244,7 +244,7 @@ const AdminDashboard = () => {
                 <div className="dropdown-divider"></div>
 
                 {/* Botón 1: Guía de uso*/}
-                <button className="dropdown-item" onClick={() => alert('Próximamente: Guía de uso')}>
+                <button className="dropdown-item" onClick={() => window.open('https://unidadestecno-my.sharepoint.com/:b:/g/personal/dlnovoa_uts_edu_co/IQDDBZdSSzBETYyKDbyCuKRbARd0gOTYaEcNZVvI2OGrYlE?e=D8Fpx1', '_blank')}>
                   <BookOpen size={18} />
                   Guía de uso
                 </button>

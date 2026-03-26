@@ -246,7 +246,7 @@ const GestionCitas = () => {
     <div className="dashboard-container">
       <header className={`n8n-header ${!isHeaderVisible ? 'header-hidden' : ''}`}>
         <div className="n8n-header-content">
-          <div className="brand-logo-n8n">
+          <div className="brand-logo-n8n" style={{ cursor: 'pointer' }} onClick={() => navigate('/admin')}>
             <img src={logoAgendcut} alt="AgendCut Logo" />
             <div className="brand-text">
               <span className="brand-name">AgendCut</span>

@@ -61,6 +61,18 @@ const Login = () => {
     setError('');
     setMensajeExito('');
 
+    // Validación estricta del formato del correo electrónico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    if (!email) {
+      setError('Por favor, ingresa tu correo electrónico.');
+      setLoading(false);
+      return;
+    } else if (!emailRegex.test(email)) {
+      setError('Por favor, ingresa un correo electrónico válido (ejemplo: usuario@dominio.com).');
+      setLoading(false);
+      return;
+    }
+
     if (vista === 'login') {
       await ejecutarLogin();
     } else if (vista === 'registro') {
@@ -158,6 +170,17 @@ const Login = () => {
     setMensajeExito('');
   };
 
+  // Validar el correo al salir de la casilla (onBlur)
+  const validarCorreoAlSalir = () => {
+    if (!email) return; 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      setError('Por favor, ingresa un correo electrónico válido (ejemplo: usuario@dominio.com).');
+    } else if (error === 'Por favor, ingresa un correo electrónico válido (ejemplo: usuario@dominio.com).') {
+      setError('');
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="login-card">
@@ -210,8 +233,15 @@ const Login = () => {
             <input 
               type="email" 
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={vista === 'login' ? "admin@agendcut.com" : "tu@correo.com"}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                // Si había error de correo, limpiar mientras el usuario corrige
+                if (error === 'Por favor, ingresa un correo electrónico válido (ejemplo: usuario@dominio.com).') {
+                  setError('');
+                }
+              }}
+              onBlur={validarCorreoAlSalir}
+              placeholder={vista === 'login' ? "username@correo.com" : "tu@correo.com"}
               required 
             />
           </div>
